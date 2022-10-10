@@ -3,4 +3,8 @@ from urllib import response
 from rest_framework import status
 from rest_framework import api_view
 from rest_framework import response
-from .models import supers
+from .models import Super
+from .serializers import SuperSerializer
+from supers import serializers
+
+
