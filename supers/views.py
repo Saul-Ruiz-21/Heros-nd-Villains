@@ -9,11 +9,16 @@ from supers import serializers
 
 @api_view(['GET', 'POST'])
 def supers_list(request):
-
     if request.method == 'GET':
+        super_type_request = request.query_params.get('type')
+        if super_type_request:
+            super_type = Super.objects.filter(super_type__type = super_type_request)
+            serializer = SuperSerializer(super_type, many = True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         super = Super.objects.all()
         serializer = SuperSerializer(super, many = True)
         return Response(serializer.data)
+    
 
     elif request.method == 'POST':
         serializer = SuperSerializer(data = request.data)
